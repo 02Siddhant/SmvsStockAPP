@@ -34,6 +34,7 @@ import {
 import GlobalUnitsPanel from './components/GlobalUnitsPanel';
 import PhysicalStockCheckerPanel from './components/PhysicalStockCheckerPanel';
 import NonListedCentersPanel from './components/NonListedCentersPanel';
+import MaintenancePage from './components/MaintenancePage';
 import { entryNeedsCenterResolution } from './components/NonListedCentersPanel';
 import {
   buildItemNameKey,
@@ -233,7 +234,14 @@ const getInitialRouteState = () => {
   return { view: 'login', directOrderId: null, directSendOrderId: null, directReportId: null, directPurchaseId: null };
 };
 
+// Set to true to activate maintenance mode across the entire app
+const IS_MAINTENANCE_MODE = true;
+
 function App() {
+  if (IS_MAINTENANCE_MODE) {
+    return <MaintenancePage />;
+  }
+
   const [initialRoute] = useState(getInitialRouteState);
   const [user, setUser] = useState(null); 
   const [view, setView] = useState(initialRoute.view); 
